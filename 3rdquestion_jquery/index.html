@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <title>JQuery Assignment</title>
+   <style>
+          p {
+                color: orange;
+                background: black;
+            }
+            .comments {
+                background-color: black;
+            }
+
+            button#load {
+                    width: 200px;
+                    height: 50px;
+                    background: green;
+            }
+            button#load:hover {
+                animation-name: background-color;
+                animation-duration: 500ms;
+            }
+            
+            @keyframes background-color {
+                100% {
+                    background-color: white;
+                }
+            }
+   </style>
+</head>
+ 
+<body>
+   <div class="comments" style="border: 1px solid green;padding:1rem;margin-bottom: 0.5rem;">
+   </div>
+   <button id="load">Load Data</button>
+   <script>  
+   
+     $(document).ready(function(){
+        $("#load").click(function(){
+            $.ajax({
+                url:'https://jsonplaceholder.typicode.com/posts',
+                type:'GET',
+                success: function(data){
+                    $('#content').html($(data).find('#content').html());
+                    console.log(data[0].body);
+                    for(var i=0;i<data.length;i++){
+                        $(".comments").append("<p>" + data[i].title + "<br>" + data[i].body + "</p>"); 
+                    }
+                }
+           });
+        });
+    });  
+        
+          
+   </script>
+</body>
+ </html> 
